@@ -1,0 +1,10 @@
+C:\Users\Nik\Desktop\KrizInKrog\GUI - nik\KrizInKrog\KrizInKrog\bin\Debug\KrizInKrog.exe.config
+C:\Users\Nik\Desktop\KrizInKrog\GUI - nik\KrizInKrog\KrizInKrog\bin\Debug\KrizInKrog.exe
+C:\Users\Nik\Desktop\KrizInKrog\GUI - nik\KrizInKrog\KrizInKrog\bin\Debug\KrizInKrog.pdb
+C:\Users\Nik\Desktop\KrizInKrog\GUI - nik\KrizInKrog\KrizInKrog\obj\Debug\KrizInKrog.csproj.AssemblyReference.cache
+C:\Users\Nik\Desktop\KrizInKrog\GUI - nik\KrizInKrog\KrizInKrog\obj\Debug\KrizInKrog.Form1.resources
+C:\Users\Nik\Desktop\KrizInKrog\GUI - nik\KrizInKrog\KrizInKrog\obj\Debug\KrizInKrog.Properties.Resources.resources
+C:\Users\Nik\Desktop\KrizInKrog\GUI - nik\KrizInKrog\KrizInKrog\obj\Debug\KrizInKrog.csproj.GenerateResource.cache
+C:\Users\Nik\Desktop\KrizInKrog\GUI - nik\KrizInKrog\KrizInKrog\obj\Debug\KrizInKrog.csproj.CoreCompileInputs.cache
+C:\Users\Nik\Desktop\KrizInKrog\GUI - nik\KrizInKrog\KrizInKrog\obj\Debug\KrizInKrog.exe
+C:\Users\Nik\Desktop\KrizInKrog\GUI - nik\KrizInKrog\KrizInKrog\obj\Debug\KrizInKrog.pdb
