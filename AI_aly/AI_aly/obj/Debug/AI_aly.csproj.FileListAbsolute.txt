@@ -1,0 +1,7 @@
+F:\KrizInKrog\AI_aly\AI_aly\bin\Debug\AI_aly.exe.config
+F:\KrizInKrog\AI_aly\AI_aly\bin\Debug\AI_aly.exe
+F:\KrizInKrog\AI_aly\AI_aly\bin\Debug\AI_aly.pdb
+F:\KrizInKrog\AI_aly\AI_aly\obj\Debug\AI_aly.csprojAssemblyReference.cache
+F:\KrizInKrog\AI_aly\AI_aly\obj\Debug\AI_aly.csproj.CoreCompileInputs.cache
+F:\KrizInKrog\AI_aly\AI_aly\obj\Debug\AI_aly.exe
+F:\KrizInKrog\AI_aly\AI_aly\obj\Debug\AI_aly.pdb
