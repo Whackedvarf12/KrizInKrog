@@ -8,18 +8,34 @@ namespace AI_aly
 {
     class Program
     {
-        public int gameMoves = 0;
-        public int x { set; get; }
-        public int y = 0;
         static void Main(string[] args)
         {
+            int x = 0;
+            int y = 0;
+            int gameMoves =0;
+            int playerController = 1;
             int[,] field = new int[3, 3];
-            for (int status = 0; status < 10; status = status)
+            for (int status = 0; status < 9; status = status)
             {
                 Console.WriteLine("Vnesi x");
-                Console.ReadLine();
-                Console.ReadLine();
+                x = Int32.Parse(Console.ReadLine());
+                Console.WriteLine("Vnesi y");
+                y = Int32.Parse(Console.ReadLine());
+                if (nextMove(field, x, y, playerController))
+                {
+                    gameMoves++;
+                    if (playerController==1)
+                    {
+                        playerController = 2;
+                    }
+                    else
+                    {
+                        playerController = 1;
+                    }
+                }
+                
             }
+            Console.WriteLine(gameMoves);
             Console.Read();
         }
         public static void viewField(int[,] field)
@@ -49,6 +65,24 @@ namespace AI_aly
             {
                 field[x, y] = 1;
                 return field;
+            }
+        }
+        public static bool nextMove(int[,] field, int x, int y, int player)
+        {
+            if (x < 0 || x >= 3 || y < 0 || y >= 3)
+            {
+                Console.WriteLine("Cell out of bounds.");
+                return false;
+            }
+            else if (field[x, y] > 0)
+            {
+                Console.WriteLine("Cell already used.");
+                return false;
+            }
+            else
+            {
+                field[x, y] = player;
+                return true;
             }
         }
     }
