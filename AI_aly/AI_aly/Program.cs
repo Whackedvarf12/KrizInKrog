@@ -13,7 +13,7 @@ namespace AI_aly
             int x = 0;
             int y = 0;
             int gameMoves =0;
-            int playerController = 1;
+            int playerController = 1; // 1 je človek, 2 je računalnik
             int[,] field = new int[3, 3];
             for (int status = 0; status < 9; status = status)
             {
@@ -30,6 +30,7 @@ namespace AI_aly
                     }
                     else
                     {
+                        //field = ;
                         playerController = 1;
                     }
                 }
@@ -81,8 +82,14 @@ namespace AI_aly
             }
             else
             {
-                field[x, y] = player;
                 return true;
+            }
+        }
+        public static int[,] evaluateField(int[,] field)
+        {
+            if ()
+            {
+
             }
         }
     }
