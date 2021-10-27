@@ -10,5 +10,10 @@ namespace AI_aly
     {
         private int[,] polje { get; set; }
         private int tocke { get; set; }
+        public Poteza(int[,] polje, int tocke)
+        {
+            this.polje = polje;
+            this.tocke = tocke;
+        }
     }
 }

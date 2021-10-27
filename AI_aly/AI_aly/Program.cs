@@ -10,12 +10,12 @@ namespace AI_aly
     {
         static void Main(string[] args)
         {
-            int x = 0;
-            int y = 0;
-            int gameMoves =0;
+            int x = 0; //x koordinata za polje
+            int y = 0; //y koordinata za polje
+            int gameMoves =0; //koliko korakov je minilo
             int playerController = 1; // 1 je človek, 2 je računalnik
-            int[,] field = new int[3, 3];
-            for (int status = 0; status < 9; status = status)
+            int[,] field = { { 0, 0, 0 }, { 0, 0, 0 }, { 0, 0, 0 } }; //novo polje
+            /*for (int status = 0; status < 9; status = status)
             {
                 Console.WriteLine("Vnesi x");
                 x = Int32.Parse(Console.ReadLine());
@@ -24,6 +24,7 @@ namespace AI_aly
                 if (nextMove(field, x, y, playerController))
                 {
                     gameMoves++;
+                    evaluateField(field);
                     if (playerController==1)
                     {
                         playerController = 2;
@@ -35,8 +36,9 @@ namespace AI_aly
                     }
                 }
                 
-            }
-            Console.WriteLine(gameMoves);
+            }*/
+            //Console.WriteLine(gameMoves);
+            evaluateField(field);
             Console.Read();
         }
         public static void viewField(int[,] field)
@@ -55,6 +57,7 @@ namespace AI_aly
         {
             return true;
         }
+
         public static int[,] crissOrCross(int[,] field, int x, int y)
         {
             if (field[x, y] > 1)
@@ -68,6 +71,7 @@ namespace AI_aly
                 return field;
             }
         }
+
         public static bool nextMove(int[,] field, int x, int y, int player)
         {
             if (x < 0 || x >= 3 || y < 0 || y >= 3)
@@ -75,7 +79,7 @@ namespace AI_aly
                 Console.WriteLine("Cell out of bounds.");
                 return false;
             }
-            else if (field[x, y] > 0)
+            else if (field[x, y]!=0)
             {
                 Console.WriteLine("Cell already used.");
                 return false;
@@ -85,12 +89,53 @@ namespace AI_aly
                 return true;
             }
         }
-        public static int[,] evaluateField(int[,] field)
+
+        public static void /*int[,]*/ evaluateField(int[,] field)
         {
-            if ()
+            List<Poteza> moznePoteze = new List<Poteza>();
+            for (int i=0;i<3;i++)
             {
+                for (int j=0;j<3;j++)
+                {
+                    Console.WriteLine("st polja je=" + field[i, j]);
+                    if (field[i,j]==0)
+                    {
+                        field[i, j] = 2;
+                        moznePoteze.Add(new Poteza(field, 0));
+                        field[i, j] = 0;
+                    }
+                }
+                Console.Write("st vrstice je=" + field[i, 0]);
 
             }
+            Console.WriteLine("mozne poteze="+moznePoteze.Count);
+            for (int i=0;i>moznePoteze.Count;i++)
+            {
+                Console.WriteLine("|"+moznePoteze[i]);
+            }
         }
+
+        public static int checkCorners(int[,] field)
+        {
+            int cornerScore = 0;
+            if (field[0, 0] == 1)
+            {
+                cornerScore -= 1;
+            }
+            if (field[0, 2] == 1)
+            {
+                cornerScore -= 1;
+            }
+            if (field[2, 0] == 1)
+            {
+                cornerScore -= 1;
+            }
+            if (field[2, 2] == 1)
+            {
+                cornerScore -= 1;
+            }
+            return cornerScore;
+        }
+        //public static Poteza 
     }
 }
