@@ -8,8 +8,8 @@ namespace AI_aly
 {
     class Poteza //Ta razred bo uporabljen za shranjevanje možnih potez
     {
-        private int[,] polje { get; set; }
-        private int tocke { get; set; }
+        public int[,] polje { get; set; }
+        public int tocke { get; set; }
         public Poteza(int[,] polje, int tocke)
         {
             this.polje = polje;

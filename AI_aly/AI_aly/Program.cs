@@ -12,9 +12,9 @@ namespace AI_aly
         {
             int x = 0; //x koordinata za polje
             int y = 0; //y koordinata za polje
-            int gameMoves =0; //koliko korakov je minilo
+            int gameMoves = 0; //koliko korakov je minilo
             int playerController = 1; // 1 je človek, 2 je računalnik
-            int[,] field = { { 0, 0, 0 }, { 0, 0, 0 }, { 0, 0, 0 } }; //novo polje
+            int[,] field = { { 2, 0, 2 }, { 0, 0, 0 }, { 0, 0, 0 } }; //novo polje
             /*for (int status = 0; status < 9; status = status)
             {
                 Console.WriteLine("Vnesi x");
@@ -47,7 +47,7 @@ namespace AI_aly
             {
                 for (int j = 0; j < field.GetLength(1); j++)
                 {
-                    Console.Write(field[i,j]+ "|");
+                    Console.Write(field[i, j] + "|");
                 }
                 Console.WriteLine();
             }
@@ -79,7 +79,7 @@ namespace AI_aly
                 Console.WriteLine("Cell out of bounds.");
                 return false;
             }
-            else if (field[x, y]!=0)
+            else if (field[x, y] != 0)
             {
                 Console.WriteLine("Cell already used.");
                 return false;
@@ -90,52 +90,115 @@ namespace AI_aly
             }
         }
 
-        public static void /*int[,]*/ evaluateField(int[,] field)
+        public static void /*int[,]*/ evaluateField(int[,] f)
         {
+            int[,] tempField = copyFieldFrom(f);
+
             List<Poteza> moznePoteze = new List<Poteza>();
-            for (int i=0;i<3;i++)
+            for (int i = 0; i < 3; i++)
             {
-                for (int j=0;j<3;j++)
+                for (int j = 0; j < 3; j++)
                 {
-                    Console.WriteLine("st polja je=" + field[i, j]);
-                    if (field[i,j]==0)
+                    if (tempField[i, j] == 0)
                     {
-                        field[i, j] = 2;
-                        moznePoteze.Add(new Poteza(field, 0));
-                        field[i, j] = 0;
+                        tempField[i, j] = 2;
+                        //Console.WriteLine("polje "+i+","+j+" je "+field[i,j]);
+                        moznePoteze.Add(new Poteza(tempField, 0));
                     }
+                    tempField=copyFieldFrom(f);
                 }
-                Console.Write("st vrstice je=" + field[i, 0]);
+                Console.Write("st vrstice je=" + tempField[i, 0]);
 
             }
-            Console.WriteLine("mozne poteze="+moznePoteze.Count);
-            for (int i=0;i>moznePoteze.Count;i++)
-            {
-                Console.WriteLine("|"+moznePoteze[i]);
-            }
+            Console.WriteLine("mozne poteze=" + moznePoteze.Count);
+            vrednostLastnihPotez(moznePoteze);
+            tockePoteze(moznePoteze);
         }
 
         public static int checkCorners(int[,] field)
         {
             int cornerScore = 0;
+
             if (field[0, 0] == 1)
             {
-                cornerScore -= 1;
+                cornerScore = cornerScore - 1;
             }
+            else if (field[0, 0] == 2)
+            {
+                cornerScore += 1;
+            }
+
             if (field[0, 2] == 1)
             {
-                cornerScore -= 1;
+                cornerScore = cornerScore - 1;
             }
+            else if (field[0, 2] == 2)
+            {
+                cornerScore += 1;
+            }
+
             if (field[2, 0] == 1)
             {
-                cornerScore -= 1;
+                cornerScore = cornerScore - 1;
             }
+            else if (field[2, 0] == 2)
+            {
+                cornerScore += 1;
+            }
+
             if (field[2, 2] == 1)
             {
-                cornerScore -= 1;
+                cornerScore = cornerScore - 1;
             }
+            else if (field[2, 2] == 2)
+            {
+                cornerScore += 1;
+            }
+            //Console.WriteLine(field[0, 0] + "|" + field[0, 2] + "|" + field[2, 0] + "|" + field[2, 2]);
             return cornerScore;
         }
-        //public static Poteza 
+
+        public static List<Poteza> vrednostLastnihPotez(List<Poteza> moznePoteze)
+        {
+            for (int i = 0; i < moznePoteze.Count; i++)
+            {
+                Console.WriteLine("koti=" + moznePoteze[i].polje[0,0]+"|"+ moznePoteze[i].polje[0, 2] + "|" + moznePoteze[i].polje[2, 0] + "|" + moznePoteze[i].polje[2, 2]);
+                moznePoteze[i].tocke = checkCorners(moznePoteze[i].polje);
+                Console.WriteLine("tocke=" + moznePoteze[i].tocke);
+            }
+            return moznePoteze;
+        }
+
+        public static int[,] copyFieldFrom(int[,] f)
+        {
+            int[,] tempF = new int[3,3];
+            for (int i=0; i<3;i++)
+            {
+                for (int j=0;j<3;j++)
+                {
+                    tempF[i, j] = f[i, j];
+                }
+            }
+            return tempF;
+        }
+        public static int tockePoteze(List<Poteza> moznePoteze)
+        {
+            int[] row = new int[3];
+            for (int ji = 0; ji < moznePoteze.Count; ji++)
+            {
+                for (int i = 0; i < 3; i++)
+                {
+                    for (int j = 0; j < 3; j++)
+                    {
+                        row[j] = moznePoteze[ji].polje[i, j];
+                        if (row.Count(c => c == 2) == 2)
+                        {
+                            Console.WriteLine("ta program bo gledal vrstice in jih vrednostil");
+                        }
+                    }
+                }
+            }
+            return 0;
+        }
     }
 }
