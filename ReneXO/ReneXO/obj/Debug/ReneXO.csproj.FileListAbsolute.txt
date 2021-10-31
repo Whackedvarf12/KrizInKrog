@@ -1,0 +1,7 @@
+E:\Documents\Sola\XO\KrizInKrog\ReneXO\ReneXO\bin\Debug\ReneXO.exe.config
+E:\Documents\Sola\XO\KrizInKrog\ReneXO\ReneXO\bin\Debug\ReneXO.exe
+E:\Documents\Sola\XO\KrizInKrog\ReneXO\ReneXO\bin\Debug\ReneXO.pdb
+E:\Documents\Sola\XO\KrizInKrog\ReneXO\ReneXO\obj\Debug\ReneXO.csproj.AssemblyReference.cache
+E:\Documents\Sola\XO\KrizInKrog\ReneXO\ReneXO\obj\Debug\ReneXO.csproj.CoreCompileInputs.cache
+E:\Documents\Sola\XO\KrizInKrog\ReneXO\ReneXO\obj\Debug\ReneXO.exe
+E:\Documents\Sola\XO\KrizInKrog\ReneXO\ReneXO\obj\Debug\ReneXO.pdb
