@@ -107,12 +107,21 @@ namespace AI_aly
                     }
                     tempField=copyFieldFrom(f);
                 }
-                Console.Write("st vrstice je=" + tempField[i, 0]);
 
             }
-            Console.WriteLine("mozne poteze=" + moznePoteze.Count);
-            vrednostLastnihPotez(moznePoteze);
-            tockePoteze(moznePoteze);
+            moznePoteze=vrednostLastnihPotez(moznePoteze);
+            moznePoteze=tockePoteze(moznePoteze);
+            int max = 0;
+            for (int i=0; i<moznePoteze.Count;i++)
+            {
+                moznePoteze[i].tocke += nasprotnikovaPoteza(moznePoteze[i].polje);
+                Console.WriteLine("koncna vrednost moznoisti "+(i+1)+" je "+moznePoteze[i].tocke);
+                if (moznePoteze[i].tocke>max)
+                {
+                    max = moznePoteze[i].tocke;
+                }
+            }
+            Console.WriteLine("najvec tock "+max);
         }
 
         public static int checkCorners(int[,] field)
@@ -162,9 +171,7 @@ namespace AI_aly
         {
             for (int i = 0; i < moznePoteze.Count; i++)
             {
-                Console.WriteLine("koti=" + moznePoteze[i].polje[0,0]+"|"+ moznePoteze[i].polje[0, 2] + "|" + moznePoteze[i].polje[2, 0] + "|" + moznePoteze[i].polje[2, 2]);
                 moznePoteze[i].tocke = checkCorners(moznePoteze[i].polje);
-                Console.WriteLine("tocke=" + moznePoteze[i].tocke);
             }
             return moznePoteze;
         }
@@ -181,24 +188,235 @@ namespace AI_aly
             }
             return tempF;
         }
-        public static int tockePoteze(List<Poteza> moznePoteze)
+        public static List<Poteza> tockePoteze(List<Poteza> moznePoteze)
         {
-            int[] row = new int[3];
+            int tockeVrstic = 0;
+            int stDobrih = 0;
+            int stSlabih = 0;
             for (int ji = 0; ji < moznePoteze.Count; ji++)
             {
                 for (int i = 0; i < 3; i++)
                 {
+
                     for (int j = 0; j < 3; j++)
                     {
-                        row[j] = moznePoteze[ji].polje[i, j];
-                        if (row.Count(c => c == 2) == 2)
+                        if (moznePoteze[ji].polje[i, j] == 2)
                         {
-                            Console.WriteLine("ta program bo gledal vrstice in jih vrednostil");
+                            stDobrih++;
+                        }
+                        else if (moznePoteze[ji].polje[i, j] == 1)
+                        {
+                            stSlabih++;
                         }
                     }
+                    if (stDobrih > 0)
+                    {
+                        switch (stDobrih)
+                        {
+                            case 1:
+                                tockeVrstic += 1;
+                                break;
+                            case 2:
+                                tockeVrstic += 2;
+                                break;
+                            case 3:
+                                tockeVrstic += 10;
+                                break;
+                        }
+
+                    }
+                    if (stSlabih > 0)
+                    {
+
+                        switch (stSlabih)
+                        {
+                            case 1:
+                                tockeVrstic -= 1;
+                                break;
+                            case 2:
+                                tockeVrstic -= 2;
+                                break;
+                            case 3:
+                                tockeVrstic -= 20;
+                                break;
+                        }
+                    }
+                    stDobrih = 0;
+                    stSlabih = 0;
+                    moznePoteze[ji].tocke = tockeVrstic;
+                    tockeVrstic = 0;
+                }
+                
+            }
+
+            for (int ji = 0; ji < moznePoteze.Count; ji++)
+            {
+                for (int i = 0; i < 3; i++)
+                {
+
+                    for (int j = 0; j < 3; j++)
+                    {
+
+                        if (moznePoteze[ji].polje[j, i] == 2)
+                        {
+                            stDobrih++;
+                        }
+                        else if (moznePoteze[ji].polje[j, i] == 1)
+                        {
+                            stSlabih++;
+                        }
+                    }
+                    if (stDobrih > 0)
+                    {
+                        switch (stDobrih)
+                        {
+                            case 1:
+                                tockeVrstic += 1;
+                                break;
+                            case 2:
+                                tockeVrstic += 2;
+                                break;
+                            case 3:
+                                tockeVrstic += 10;
+                                break;
+                        }
+
+                    }
+                    if (stSlabih > 0)
+                    {
+
+                        switch (stSlabih)
+                        {
+                            case 1:
+                                tockeVrstic -= 1;
+                                break;
+                            case 2:
+                                tockeVrstic -= 2;
+                                break;
+                            case 3:
+                                tockeVrstic -= 20;
+                                break;
+                        }
+                    }
+                    stDobrih = 0;
+                    stSlabih = 0;
+                    moznePoteze[ji].tocke = tockeVrstic;
+                    tockeVrstic = 0;
+                }
+
+            }
+
+            for (int ji = 0; ji < moznePoteze.Count; ji++)
+            {
+                for (int i = 0; i < 3; i++)
+                {
+                    if (moznePoteze[ji].polje[i, i] == 2)
+                    {
+                        stDobrih++;
+                    }
+                    else if (moznePoteze[ji].polje[i, i] == 1)
+                    {
+                        stSlabih++;
+                    }
+                }
+
+                if (moznePoteze[ji].polje[0,2]==1)
+                {
+                    stSlabih++;
+                }
+                else if (moznePoteze[ji].polje[0, 2] == 2)
+                {
+                    stDobrih++;
+                }
+                if (moznePoteze[ji].polje[1, 1] == 1)
+                {
+                    stSlabih++;
+                }
+                else if (moznePoteze[ji].polje[1, 1] == 2)
+                {
+                    stDobrih++;
+                }
+                if (moznePoteze[ji].polje[2, 0] == 1)
+                {
+                    stSlabih++;
+                }
+                else if (moznePoteze[ji].polje[2, 0] == 2)
+                {
+                    stDobrih++;
+                }
+                if (stDobrih > 0)
+                {
+                    switch (stDobrih)
+                    {
+                        case 1:
+                            tockeVrstic += 1;
+                            break;
+                        case 2:
+                            tockeVrstic += 2;
+                            break;
+                        case 3:
+                            tockeVrstic += 10;
+                            break;
+                    }
+
+                }
+                if (stSlabih > 0)
+                {
+
+                    switch (stSlabih)
+                    {
+                        case 1:
+                            tockeVrstic -= 1;
+                            break;
+                        case 2:
+                            tockeVrstic -= 2;
+                            break;
+                        case 3:
+                            tockeVrstic -= 20;
+                            break;
+                    }
+                }
+                stDobrih = 0;
+                stSlabih = 0;
+                moznePoteze[ji].tocke = tockeVrstic;
+                tockeVrstic = 0;
+
+            }
+            return moznePoteze;
+        }
+
+        public static int nasprotnikovaPoteza(int[,] f)
+        {
+            int[,] tempField = copyFieldFrom(f);
+
+            List<Poteza> moznePotezeNas = new List<Poteza>();
+            for (int i = 0; i < 3; i++)
+            {
+                for (int j = 0; j < 3; j++)
+                {
+                    if (tempField[i, j] == 0)
+                    {
+                        tempField[i, j] = 1;
+                        //Console.WriteLine("polje "+i+","+j+" je "+field[i,j]);
+                        moznePotezeNas.Add(new Poteza(tempField, 0));
+                    }
+                    tempField = copyFieldFrom(f);
+                }
+                
+
+            }
+            
+            moznePotezeNas = vrednostLastnihPotez(moznePotezeNas);
+            moznePotezeNas = tockePoteze(moznePotezeNas);
+            int min = moznePotezeNas[0].tocke;
+            for (int i=0; i<moznePotezeNas.Count;i++)
+            {
+                if (moznePotezeNas[i].tocke<min)
+                {
+                    min = moznePotezeNas[i].tocke;
                 }
             }
-            return 0;
+            return min;
         }
     }
 }
