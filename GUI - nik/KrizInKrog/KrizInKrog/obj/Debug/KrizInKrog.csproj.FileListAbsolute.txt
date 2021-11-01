@@ -8,3 +8,13 @@ C:\Users\Nik\Desktop\KrizInKrog\GUI - nik\KrizInKrog\KrizInKrog\obj\Debug\KrizIn
 C:\Users\Nik\Desktop\KrizInKrog\GUI - nik\KrizInKrog\KrizInKrog\obj\Debug\KrizInKrog.csproj.CoreCompileInputs.cache
 C:\Users\Nik\Desktop\KrizInKrog\GUI - nik\KrizInKrog\KrizInKrog\obj\Debug\KrizInKrog.exe
 C:\Users\Nik\Desktop\KrizInKrog\GUI - nik\KrizInKrog\KrizInKrog\obj\Debug\KrizInKrog.pdb
+F:\KrizInKrog\GUI - nik\KrizInKrog\KrizInKrog\bin\Debug\KrizInKrog.exe.config
+F:\KrizInKrog\GUI - nik\KrizInKrog\KrizInKrog\bin\Debug\KrizInKrog.exe
+F:\KrizInKrog\GUI - nik\KrizInKrog\KrizInKrog\bin\Debug\KrizInKrog.pdb
+F:\KrizInKrog\GUI - nik\KrizInKrog\KrizInKrog\obj\Debug\KrizInKrog.csprojAssemblyReference.cache
+F:\KrizInKrog\GUI - nik\KrizInKrog\KrizInKrog\obj\Debug\KrizInKrog.Form1.resources
+F:\KrizInKrog\GUI - nik\KrizInKrog\KrizInKrog\obj\Debug\KrizInKrog.Properties.Resources.resources
+F:\KrizInKrog\GUI - nik\KrizInKrog\KrizInKrog\obj\Debug\KrizInKrog.csproj.GenerateResource.cache
+F:\KrizInKrog\GUI - nik\KrizInKrog\KrizInKrog\obj\Debug\KrizInKrog.csproj.CoreCompileInputs.cache
+F:\KrizInKrog\GUI - nik\KrizInKrog\KrizInKrog\obj\Debug\KrizInKrog.exe
+F:\KrizInKrog\GUI - nik\KrizInKrog\KrizInKrog\obj\Debug\KrizInKrog.pdb
