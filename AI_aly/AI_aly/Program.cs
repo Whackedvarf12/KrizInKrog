@@ -38,7 +38,8 @@ namespace AI_aly
                 
             }*/
             //Console.WriteLine(gameMoves);
-            evaluateField(field);
+            field=evaluateField(field);
+            viewField(field);
             Console.Read();
         }
         public static void viewField(int[,] field)
@@ -90,9 +91,10 @@ namespace AI_aly
             }
         }
 
-        public static void /*int[,]*/ evaluateField(int[,] f)
+        public static int[,] evaluateField(int[,] f)
         {
             int[,] tempField = copyFieldFrom(f);
+            int[,] bestField = copyFieldFrom(f);
 
             List<Poteza> moznePoteze = new List<Poteza>();
             for (int i = 0; i < 3; i++)
@@ -121,6 +123,14 @@ namespace AI_aly
                     max = moznePoteze[i].tocke;
                 }
             }
+            for (int i = 0; i < moznePoteze.Count; i++)
+            {
+                if (moznePoteze[i].tocke == max)
+                {
+                    bestField=copyFieldFrom(moznePoteze[i].polje);
+                }
+            }
+            return bestField;
             Console.WriteLine("najvec tock "+max);
         }
 
