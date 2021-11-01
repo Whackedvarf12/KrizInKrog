@@ -14,8 +14,9 @@ namespace AI_aly
             int y = 0; //y koordinata za polje
             int gameMoves = 0; //koliko korakov je minilo
             int playerController = 1; // 1 je človek, 2 je računalnik
-            int[,] field = { { 2, 0, 2 }, { 0, 0, 0 }, { 0, 0, 0 } }; //novo polje
-            /*for (int status = 0; status < 9; status = status)
+            int[,] field = { { 0, 0, 0 }, { 0, 0, 0 }, { 0, 0, 0 } }; //novo polje
+
+            for (int status = 0; status < 9; status = status)
             {
                 Console.WriteLine("Vnesi x");
                 x = Int32.Parse(Console.ReadLine());
@@ -23,23 +24,26 @@ namespace AI_aly
                 y = Int32.Parse(Console.ReadLine());
                 if (nextMove(field, x, y, playerController))
                 {
+                    field[x, y] = 1;
                     gameMoves++;
-                    evaluateField(field);
-                    if (playerController==1)
+                    /*if (playerController==1)
                     {
                         playerController = 2;
                     }
                     else
                     {
-                        //field = ;
                         playerController = 1;
+                    }*/
+                    field = copyFieldFrom(evaluateField(field));
+                    viewField(field);
+                    if (gameFinished(field))
+                    {
+                        break;
                     }
                 }
                 
-            }*/
-            //Console.WriteLine(gameMoves);
-            field=evaluateField(field);
-            viewField(field);
+            }
+            Console.WriteLine("Igra je končana");
             Console.Read();
         }
         public static void viewField(int[,] field)
@@ -52,11 +56,134 @@ namespace AI_aly
                 }
                 Console.WriteLine();
             }
-            Console.Read();
         }
         public static Boolean gameFinished(int[,] field)
         {
-            return true;
+
+            int igralec1 = 0;
+            int igralec2 = 0;
+            for (int i = 0; i < 3; i++)
+            {
+
+                    for (int j = 0; j < 3; j++)
+                    {
+                        if (field[i, j] == 1)
+                        {
+                        igralec1++;
+                        }
+                        else if (field[i, j] == 2)
+                        {
+                        igralec2++;
+                        }
+                    }
+                if (igralec1 == 3)
+                {
+                    Console.WriteLine("Zmagal je igralec 1");
+                    return true;
+                }
+                else if (igralec2 == 3)
+                {
+                    Console.WriteLine("Zmagal je igralec 2");
+                    return true;
+                }
+                igralec1 = 0;
+                igralec2 = 0;
+            }
+                
+            
+
+                for (int i = 0; i < 3; i++)
+                {
+
+                    for (int j = 0; j < 3; j++)
+                    {
+
+                        if (field[j, i] == 1)
+                        {
+                        igralec1++;
+                        }
+                        else if (field[j, i] == 2)
+                        {
+                        igralec2++;
+                        }
+                    }
+                if (igralec1 == 3)
+                {
+                    Console.WriteLine("Zmagal je igralec 1");
+                    return true;
+                }
+                else if (igralec2 == 3)
+                {
+                    Console.WriteLine("Zmagal je igralec 2");
+                    return true;
+                }
+                igralec1 = 0;
+                igralec2 = 0;
+            }
+
+            
+
+
+                for (int i = 0; i < 3; i++)
+                {
+                    if (field[i, i] == 1)
+                    {
+                    igralec1++;
+                    }
+                    else if (field[i, i] == 2)
+                    {
+                    igralec2++;
+                    }
+                }
+            if (igralec1 == 3)
+            {
+                Console.WriteLine("Zmagal je igralec 1");
+                return true;
+            }
+            else if (igralec2 == 3)
+            {
+                Console.WriteLine("Zmagal je igralec 2");
+                return true;
+            }
+            igralec1 = 0;
+            igralec2 = 0;
+
+            if (field[0,2]==2)
+                {
+                igralec2++;
+                }
+                else if (field[0,2] == 1)
+                {
+                igralec1++;
+                }
+                if (field[1, 1] == 2)
+                {
+                igralec2++;
+                }
+                else if (field[1, 1] == 1)
+                {
+                igralec1++;
+                }
+                if (field[2, 0] == 2)
+                {
+                igralec2++;
+                }
+                else if (field[2, 0] == 1)
+                {
+                igralec1++;
+                }
+                if (igralec1 == 3)
+                {
+                Console.WriteLine("Zmagal je igralec 1");
+                return true;
+                }
+                else if (igralec2 == 3)
+                {
+                Console.WriteLine("Zmagal je igralec 2");
+                return true;
+                }
+            return false;
+            
         }
 
         public static int[,] crissOrCross(int[,] field, int x, int y)
@@ -113,7 +240,7 @@ namespace AI_aly
             }
             moznePoteze=vrednostLastnihPotez(moznePoteze);
             moznePoteze=tockePoteze(moznePoteze);
-            int max = 0;
+            int max = -100;
             for (int i=0; i<moznePoteze.Count;i++)
             {
                 moznePoteze[i].tocke += nasprotnikovaPoteza(moznePoteze[i].polje);
@@ -127,31 +254,32 @@ namespace AI_aly
             {
                 if (moznePoteze[i].tocke == max)
                 {
-                    bestField=copyFieldFrom(moznePoteze[i].polje);
+                    bestField = copyFieldFrom(moznePoteze[i].polje);
                 }
             }
+            Console.WriteLine("najvec tock " + max);
             return bestField;
-            Console.WriteLine("najvec tock "+max);
+            
         }
 
         public static int checkCorners(int[,] field)
         {
             int cornerScore = 0;
 
-            if (field[0, 0] == 1)
+            if (field[0,0] == 1)
             {
                 cornerScore = cornerScore - 1;
             }
-            else if (field[0, 0] == 2)
+            else if (field[0,0] == 2)
             {
                 cornerScore += 1;
             }
 
-            if (field[0, 2] == 1)
+            if (field[0,2] == 1)
             {
                 cornerScore = cornerScore - 1;
             }
-            else if (field[0, 2] == 2)
+            else if (field[0,2] == 2)
             {
                 cornerScore += 1;
             }
@@ -329,6 +457,42 @@ namespace AI_aly
                         stSlabih++;
                     }
                 }
+                if (stDobrih > 0)
+                {
+                    switch (stDobrih)
+                    {
+                        case 1:
+                            tockeVrstic += 1;
+                            break;
+                        case 2:
+                            tockeVrstic += 2;
+                            break;
+                        case 3:
+                            tockeVrstic += 10;
+                            break;
+                    }
+
+                }
+                if (stSlabih > 0)
+                {
+
+                    switch (stSlabih)
+                    {
+                        case 1:
+                            tockeVrstic -= 1;
+                            break;
+                        case 2:
+                            tockeVrstic -= 2;
+                            break;
+                        case 3:
+                            tockeVrstic -= 20;
+                            break;
+                    }
+                }
+                stDobrih = 0;
+                stSlabih = 0;
+                moznePoteze[ji].tocke = tockeVrstic;
+                tockeVrstic = 0;
 
                 if (moznePoteze[ji].polje[0,2]==1)
                 {
